@@ -31,5 +31,5 @@ jobs:
           file: ./utils/Dockerfile
           push: true
           tags: |
-            agnessnowplow/newrepo/fractribution:${{ env.VERSION }}
-            agnessnowplow/newrepo/fractribution:latest
+            agnessnowplow/newrepo:${{ env.VERSION }}
+            agnessnowplow/newrepo:latest
