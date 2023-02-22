@@ -34,5 +34,5 @@ jobs:
           file: ./utils/Dockerfile
           push: true
           tags: |
-            agnessnowplow/newrepo:${{steps.run_tests.outputs.dbt_package_version}}
+            agnessnowplow/newrepo:test${{steps.run_tests.outputs.dbt_package_version}}
             agnessnowplow/newrepo:latest
