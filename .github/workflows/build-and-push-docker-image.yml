@@ -12,6 +12,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Get package version
+        id: version
+        # Grab the version number of from the project.yml file as the pushed version of the package, set to variable dbt_package_version
+        run: echo "dbt_package_version=$(grep -oP "(?<=version: ')(.*)(?=')" dbt_project.yml)" >> $GITHUB_OUTPUT
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -28,5 +33,5 @@ jobs:
           file: ./utils/Dockerfile
           push: true
           tags: |
-            agnessnowplow/newrepo:$(grep -oP "(?<=version: ')(.*)(?=')" dbt_project.yml)
+            agnessnowplow/newrepo:${{steps.run_tests.outputs.dbt_package_version}}
             agnessnowplow/newrepo:latest
