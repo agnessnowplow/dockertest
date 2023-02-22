@@ -3,14 +3,11 @@ name: Build and Push to Docker Hub
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'utils/**'
 
 jobs:
   build_container:
     runs-on: ubuntu-latest
-    env:
-      VERSION: 1.0.4
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -31,5 +28,5 @@ jobs:
           file: ./utils/Dockerfile
           push: true
           tags: |
-            agnessnowplow/newrepo:${{ env.VERSION }}
+            agnessnowplow/newrepo:$(grep -oP "(?<=version: ')(.*)(?=')" dbt_project.yml)
             agnessnowplow/newrepo:latest
